@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullTextSearcher", "FullTextSearcher\FullTextSearcher.csproj", "{4F440C2C-B67E-4496-9A1D-6B4152ECD87B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullTextSearcher", "FullTextSearcher\FullTextSearcher.csproj", "{F2E5E71F-9EF7-408C-A168-484D570D5B7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileReader", "FileReader\FileReader.csproj", "{841C4D0D-C93C-460D-9939-A498588CADB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +16,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4F440C2C-B67E-4496-9A1D-6B4152ECD87B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F440C2C-B67E-4496-9A1D-6B4152ECD87B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4F440C2C-B67E-4496-9A1D-6B4152ECD87B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F440C2C-B67E-4496-9A1D-6B4152ECD87B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2E5E71F-9EF7-408C-A168-484D570D5B7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2E5E71F-9EF7-408C-A168-484D570D5B7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2E5E71F-9EF7-408C-A168-484D570D5B7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2E5E71F-9EF7-408C-A168-484D570D5B7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{841C4D0D-C93C-460D-9939-A498588CADB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{841C4D0D-C93C-460D-9939-A498588CADB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{841C4D0D-C93C-460D-9939-A498588CADB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{841C4D0D-C93C-460D-9939-A498588CADB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
