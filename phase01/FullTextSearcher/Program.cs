@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.IO;
-    using FileReader;
+using FileReader;
 using SearchAlgorithm;
 // using System.Collections;
 
