@@ -10,6 +10,12 @@ public class InvertedIndex
     private List<string> fileName = new List<string>();
     private List<string> fileContext = new List<string>();
     private List<string> allTerms = new List<string>();
+    private string[] removedCharList = new string [] {
+            "@", ",", ".", ";", "'","\n",
+            "  ", "   ", "    ", "     ",
+            "?", "!", "#", "%", "$", "^",
+            "&", "*", "(", ")", "-", "_"
+        };
 
     // Constructor
     public InvertedIndex(List<string> fileNames, List<string> fileContext)
@@ -20,28 +26,11 @@ public class InvertedIndex
     }
 
     // Private Methods
-    private string RemoveWordsFromString(string mainString, List<string> removedWords, string spliter){
-        
-        foreach (var c in mainString.Split(spliter).ToList()){
-            mainString = mainString.Replace(
-                c, ""
-            );
-            
-        }
-        return mainString;
-    }
     private void PrepareContextText(){
-        var removedList = new string [] {
-            "@", ",", ".", ";", "'","\n",
-            "  ", "   ", "    ", "     ",
-            "?", "!", "#", "%", "$", "^",
-            "&", "*", "(", ")", "-", "_"
-            // ,"and", "is", "are", "or"
-        };
-
+        
         for (int i=0; i < this.fileContext.Count ; i++)
         {
-            foreach (var c in removedList)
+            foreach (var c in this.removedCharList)
             {
                 this.fileContext[i] = this.fileContext[i].Replace(
                     c, " "
@@ -63,7 +52,9 @@ public class InvertedIndex
             this.allTerms = this.allTerms.Union(splitedContext).ToList();
         }
     }
-    
+    private List<string> FindSingleWordContexes(string searchedWord){
+        return this.invertedIndexTable[searchedWord].ToString().Split(", ").ToList();
+    }
     // Public Methods
     public void CreateHashtable(){
         this.CreateAllTerms();
@@ -89,34 +80,28 @@ public class InvertedIndex
         List<string> resultList = new List<string>();
         List<string> splitedTerms = term.Split(' ').ToList();
         for(int i=0 ; i < splitedTerms.Count; i++){
-            
-            if(i == 0)
-                if(this.invertedIndexTable.ContainsKey(splitedTerms[i])){
-                    List<string> findedList = this.invertedIndexTable[splitedTerms[i]].ToString().Split(", ").ToList();
+            if(this.invertedIndexTable.ContainsKey(splitedTerms[i])){
+
+                if(i == 0){
+                    List<string> findedList = FindSingleWordContexes(splitedTerms[i]);
                     resultList = resultList.Union(findedList).ToList();
                     continue;
                 }
-        
-            if(splitedTerms[i-1] == "+"){
-                // implement OR 
-                if(this.invertedIndexTable.ContainsKey(splitedTerms[i])){
-                    List<string> findedList = this.invertedIndexTable[splitedTerms[i]].ToString().Split(", ").ToList();
+                if(splitedTerms[i-1] == "+"){
+                    // implement OR 
+                    List<string> findedList = FindSingleWordContexes(splitedTerms[i]);
                     resultList = resultList.Union(findedList).ToList();
                     continue;
                 }
-            }
-            else if (splitedTerms[i-1] == "-"){
-                // implement Exclude
-                if(this.invertedIndexTable.ContainsKey(splitedTerms[i])){
-                    List<string> removedResults = this.invertedIndexTable[splitedTerms[i]].ToString().Split(", ").ToList();
+                else if (splitedTerms[i-1] == "-"){
+                    // implement Exclude
+                    List<string> removedResults = FindSingleWordContexes(splitedTerms[i]);
                     resultList = resultList.Except(removedResults).ToList();
                     continue;
                 }
-            }
-            else {
-                // implement AND 
-                if(this.invertedIndexTable.ContainsKey(splitedTerms[i])){
-                    List<string> andResult = this.invertedIndexTable[splitedTerms[i]].ToString().Split(", ").ToList();
+                else {
+                    // implement AND 
+                    List<string> andResult = FindSingleWordContexes(splitedTerms[i]);
 
                     List<string> list_1 = andResult.Except(resultList).ToList();
 
@@ -129,7 +114,6 @@ public class InvertedIndex
                     continue;
                 }
             }
-
         }
         return String.Join(", ", resultList);
     }
