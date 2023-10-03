@@ -20,6 +20,16 @@ public class InvertedIndex
     }
 
     // Private Methods
+    private string RemoveWordsFromString(string mainString, List<string> removedWords, string spliter){
+        
+        foreach (var c in mainString.Split(spliter).ToList()){
+            mainString = mainString.Replace(
+                c, ""
+            );
+            
+        }
+        return mainString;
+    }
     private void PrepareContextText(){
         var removedList = new string [] {
             "@", ",", ".", ";", "'","\n",
@@ -63,7 +73,7 @@ public class InvertedIndex
             foreach (var (fName, fContext) in this.fileName.Zip(this.fileContext)){
                 if(fContext.Contains(item) == true){
                     hashVal.Append(fName);
-                    hashVal.Append(" , ");
+                    hashVal.Append(", ");
                 }
                 
             }
@@ -75,9 +85,53 @@ public class InvertedIndex
     }
     
     public string FindTerm(string term){
-        if(this.invertedIndexTable.ContainsKey(term))
-            return this.invertedIndexTable[term].ToString();
-        return "\nError: Not Found\n";
+
+        List<string> resultList = new List<string>();
+        List<string> splitedTerms = term.Split(' ').ToList();
+        for(int i=0 ; i < splitedTerms.Count; i++){
+            
+            if(i == 0)
+                if(this.invertedIndexTable.ContainsKey(splitedTerms[i])){
+                    List<string> findedList = this.invertedIndexTable[splitedTerms[i]].ToString().Split(", ").ToList();
+                    resultList = resultList.Union(findedList).ToList();
+                    continue;
+                }
+        
+            if(splitedTerms[i-1] == "+"){
+                // implement OR 
+                if(this.invertedIndexTable.ContainsKey(splitedTerms[i])){
+                    List<string> findedList = this.invertedIndexTable[splitedTerms[i]].ToString().Split(", ").ToList();
+                    resultList = resultList.Union(findedList).ToList();
+                    continue;
+                }
+            }
+            else if (splitedTerms[i-1] == "-"){
+                // implement Exclude
+                if(this.invertedIndexTable.ContainsKey(splitedTerms[i])){
+                    List<string> removedResults = this.invertedIndexTable[splitedTerms[i]].ToString().Split(", ").ToList();
+                    resultList = resultList.Except(removedResults).ToList();
+                    continue;
+                }
+            }
+            else {
+                // implement AND 
+                if(this.invertedIndexTable.ContainsKey(splitedTerms[i])){
+                    List<string> andResult = this.invertedIndexTable[splitedTerms[i]].ToString().Split(", ").ToList();
+
+                    List<string> list_1 = andResult.Except(resultList).ToList();
+
+                    List<string> list_2 = resultList.Except(andResult).ToList();
+
+                    List<string> concatedLists = list_2.Concat(list_1).ToList();
+
+                    resultList = resultList.Union(andResult).Except(concatedLists).ToList();
+
+                    continue;
+                }
+            }
+
+        }
+        return String.Join(", ", resultList);
     }
     
     public void WriteHashTable()
