@@ -10,7 +10,7 @@ public class InvertedIndex
     private List<string> fileName = new List<string>();
     private List<string> fileContext = new List<string>();
     private List<string> allTerms = new List<string>();
-    private string[] removedCharList = new string [] {
+    private string[] removedCharList = new string[] {
             "@", ",", ".", ";", "'","\n",
             "  ", "   ", "    ", "     ",
             "?", "!", "#", "%", "$", "^",
@@ -26,25 +26,28 @@ public class InvertedIndex
     }
 
     // Private Methods
-    private void PrepareContextText(){
-        
-        for (int i=0; i < this.fileContext.Count ; i++)
+    private void PrepareContextText()
+    {
+
+        for (int i = 0; i < this.fileContext.Count; i++)
         {
             foreach (var c in this.removedCharList)
             {
                 this.fileContext[i] = this.fileContext[i].Replace(
                     c, " "
                 );
-                
+
             }
         }
     }
-    
-    private void CreateAllTerms(){
+
+    private void CreateAllTerms()
+    {
 
         this.PrepareContextText();
 
-        foreach (string context in this.fileContext){
+        foreach (string context in this.fileContext)
+        {
             List<string> splitedContext = context.ToLower().
             Split(' ').ToList().
             Distinct().ToList();
@@ -52,21 +55,27 @@ public class InvertedIndex
             this.allTerms = this.allTerms.Union(splitedContext).ToList();
         }
     }
-    private List<string> FindSingleWordContexes(string searchedWord){
+
+    private List<string> FindSingleWordContexes(string searchedWord)
+    {
         return this.invertedIndexTable[searchedWord].ToString().Split(", ").ToList();
     }
     // Public Methods
-    public void CreateHashtable(){
+    public void CreateHashtable()
+    {
         this.CreateAllTerms();
 
-        foreach (string item in this.allTerms){
-            StringBuilder hashVal = new StringBuilder(); 
-            foreach (var (fName, fContext) in this.fileName.Zip(this.fileContext)){
-                if(fContext.Contains(item) == true){
+        foreach (string item in this.allTerms)
+        {
+            StringBuilder hashVal = new StringBuilder();
+            foreach (var (fName, fContext) in this.fileName.Zip(this.fileContext))
+            {
+                if (fContext.Contains(item) == true)
+                {
                     hashVal.Append(fName);
                     hashVal.Append(", ");
                 }
-                
+
             }
             this.invertedIndexTable.Add(
                 item,
@@ -74,34 +83,41 @@ public class InvertedIndex
             );
         }
     }
-    
-    public string FindTerm(string term){
+
+    public string FindTerm(string term)
+    {
 
         List<string> resultList = new List<string>();
         List<string> splitedTerms = term.Split(' ').ToList();
-        for(int i=0 ; i < splitedTerms.Count; i++){
-            if(this.invertedIndexTable.ContainsKey(splitedTerms[i])){
+        for (int i = 0; i < splitedTerms.Count; i++)
+        {
+            if (this.invertedIndexTable.ContainsKey(splitedTerms[i]))
+            {
 
-                if(i == 0){
-                    List<string> findedList = FindSingleWordContexes(splitedTerms[i]);
+                if (i == 0)
+                {
+                    List<string> findedList = this.FindSingleWordContexes(splitedTerms[i]);
                     resultList = resultList.Union(findedList).ToList();
                     continue;
                 }
-                if(splitedTerms[i-1] == "+"){
+                if (splitedTerms[i - 1] == "+")
+                {
                     // implement OR 
-                    List<string> findedList = FindSingleWordContexes(splitedTerms[i]);
+                    List<string> findedList = this.FindSingleWordContexes(splitedTerms[i]);
                     resultList = resultList.Union(findedList).ToList();
                     continue;
                 }
-                else if (splitedTerms[i-1] == "-"){
+                else if (splitedTerms[i - 1] == "-")
+                {
                     // implement Exclude
-                    List<string> removedResults = FindSingleWordContexes(splitedTerms[i]);
+                    List<string> removedResults = this.FindSingleWordContexes(splitedTerms[i]);
                     resultList = resultList.Except(removedResults).ToList();
                     continue;
                 }
-                else {
+                else
+                {
                     // implement AND 
-                    List<string> andResult = FindSingleWordContexes(splitedTerms[i]);
+                    List<string> andResult = this.FindSingleWordContexes(splitedTerms[i]);
 
                     List<string> list_1 = andResult.Except(resultList).ToList();
 
@@ -117,7 +133,7 @@ public class InvertedIndex
         }
         return String.Join(", ", resultList);
     }
-    
+
     public void WriteHashTable()
     {
         foreach (DictionaryEntry de in this.invertedIndexTable)

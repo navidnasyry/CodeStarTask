@@ -7,7 +7,7 @@ public class MyFolder
     private string folderPath;
     private List<string> fileName = new List<string>();
     private List<string> fileContext = new List<string>();
-    
+
     // Constructor
     public MyFolder(string folderPath)
     {
@@ -25,14 +25,17 @@ public class MyFolder
     }
 
     // Public Methods
-    public List<string> GetFileName(){
+    public List<string> GetFileName()
+    {
         return this.fileName;
     }
 
-    public List<string> GetFileContext(){
+    public List<string> GetFileContext()
+    {
         return this.fileContext;
     }
-    public string GetFolderPath(){
+    public string GetFolderPath()
+    {
         return this.folderPath;
     }
 
