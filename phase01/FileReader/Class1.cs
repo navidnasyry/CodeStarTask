@@ -3,13 +3,12 @@ public class MyFolder
 {
 
 
-
+    // Fields
     private string folderPath;
-    // private Dictionary<string, string> folderContent = new Dictionary<string, string>();
     private List<string> fileName = new List<string>();
     private List<string> fileContext = new List<string>();
     
-
+    // Constructor
     public MyFolder(string folderPath)
     {
         this.folderPath = folderPath;
@@ -25,7 +24,7 @@ public class MyFolder
 
     }
 
-
+    // Public Methods
     public List<string> GetFileName(){
         return this.fileName;
     }
@@ -36,4 +35,7 @@ public class MyFolder
     public string GetFolderPath(){
         return this.folderPath;
     }
+
+
+
 }

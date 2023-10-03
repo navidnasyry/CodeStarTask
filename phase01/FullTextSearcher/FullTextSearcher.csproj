@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FileReader\FileReader.csproj" />
+    <ProjectReference Include="..\SearchAlgorithm\SearchAlgorithm.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

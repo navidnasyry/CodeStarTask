@@ -1,38 +1,41 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.IO;
 using FileReader;
+using SearchAlgorithm;
+// using System.Collections;
 
 
 
 Console.WriteLine("Start Program...");
 
-Console.WriteLine("Enter Your Folder Path : ");
+Console.WriteLine("Enter folder path: ");
 
 string folderPath = Console.ReadLine();
 
+Console.WriteLine("Enter the desired word : ");
+
+string myTerm = Console.ReadLine();
+
+
+
 MyFolder myData = new MyFolder(folderPath);
 
-Console.WriteLine(myData.GetFolderPath());
+
+InvertedIndex myInvertedIndex = new InvertedIndex(
+    myData.GetFileName(), 
+    myData.GetFileContext()
+);
 
 
+myInvertedIndex.CreateHashtable();
+
+string dist = myInvertedIndex.FindTerm(myTerm);
+
+Console.WriteLine("Your response : ");
+
+Console.WriteLine(dist);
+
+// myInvertedIndex.WriteHashTable();
 
 
-
-
-
-// for(int i=0 ; i<5 ; i++)
-// {
-//     Console.WriteLine("LOOP:");
-//     Console.WriteLine(myData.GetFileName());
-//     Console.WriteLine(myData.GetFileName()[i]);
-//     Console.WriteLine(myData.GetFileContext()[i]);
-// }
-
-
-// string getFolderPath(){
-
-//     string folderPath = Console.ReadLine();
-
-//     return folderPath;
-// }
 
