@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileReader", "FileReader\Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAlgorithm", "SearchAlgorithm\SearchAlgorithm.csproj", "{915B04A1-E597-4C15-B7F1-95CDD6F1F7EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{24A2B437-DF47-42CC-AD21-761C7F10A2A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{915B04A1-E597-4C15-B7F1-95CDD6F1F7EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{915B04A1-E597-4C15-B7F1-95CDD6F1F7EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{915B04A1-E597-4C15-B7F1-95CDD6F1F7EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24A2B437-DF47-42CC-AD21-761C7F10A2A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24A2B437-DF47-42CC-AD21-761C7F10A2A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24A2B437-DF47-42CC-AD21-761C7F10A2A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24A2B437-DF47-42CC-AD21-761C7F10A2A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
