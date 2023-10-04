@@ -2,13 +2,14 @@
 public class MyFolder
 {
 
-
+    #region Fields
     // Fields
     private string folderPath;
     private List<string> fileName = new List<string>();
     private List<string> fileContext = new List<string>();
+    #endregion
 
-    // Constructor
+    #region Public Methods
     public MyFolder(string folderPath)
     {
         this.folderPath = folderPath;
@@ -23,7 +24,9 @@ public class MyFolder
         }
 
     }
+    #endregion
 
+    #region Private Methods
     // Public Methods
     public List<string> GetFileName()
     {
@@ -39,6 +42,6 @@ public class MyFolder
         return this.folderPath;
     }
 
-
+    #endregion
 
 }

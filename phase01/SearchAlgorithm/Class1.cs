@@ -5,6 +5,7 @@ namespace SearchAlgorithm;
 public class InvertedIndex
 {
 
+    #region Fields
     // Fields
     private Hashtable invertedIndexTable = new Hashtable();
     private List<string> fileName = new List<string>();
@@ -17,14 +18,9 @@ public class InvertedIndex
             "&", "*", "(", ")", "-", "_"
         };
 
-    // Constructor
-    public InvertedIndex(List<string> fileNames, List<string> fileContext)
-    {
-        this.fileContext = fileContext;
-        this.fileName = fileNames;
-
-    }
-
+    #endregion
+        
+    #region Private Methods
     // Private Methods
     private void PrepareContextText()
     {
@@ -60,7 +56,16 @@ public class InvertedIndex
     {
         return this.invertedIndexTable[searchedWord].ToString().Split(", ").ToList();
     }
+    #endregion
+    
+    #region Public Methods
     // Public Methods
+    public InvertedIndex(List<string> fileNames, List<string> fileContext)
+    {
+        this.fileContext = fileContext;
+        this.fileName = fileNames;
+
+    }
     public void CreateHashtable()
     {
         this.CreateAllTerms();
@@ -140,5 +145,6 @@ public class InvertedIndex
             Console.WriteLine("{0} : {1}", de.Key, de.Value);
 
     }
+    #endregion
 
 }
