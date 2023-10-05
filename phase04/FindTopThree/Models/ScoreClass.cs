@@ -11,13 +11,13 @@ namespace FindTopThree.Models
 
         public string Lesson { get; set; }
 
-        public float Score { get; set; }
+        public double Score { get; set; }
         public ScoreClass()
         {
 
         }
 
-        public ScoreClass(int studentNumber, string lesson, float score)
+        public ScoreClass(int studentNumber, string lesson, double score)
         {
             this.StudentNumber = studentNumber;
             this.Lesson = lesson;
