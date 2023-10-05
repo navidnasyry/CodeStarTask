@@ -14,3 +14,5 @@
 ## dotnet add ShowCase/ShowCase.csproj reference StringLibrary/StringLibrary.csproj
 
 ## dotnet run --project ShowCase/ShowCase.csproj
+
+## dotnet add package System.Text.Json
