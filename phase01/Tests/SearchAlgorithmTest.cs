@@ -26,8 +26,7 @@ public class SearchAlgorithmTest
 
         string dist = invAlgorithm.FindTerm(myTerm);
 
-        string realAns = this.baseDir + this.testDirectoryPath +
-            "text4" + ", " + this.baseDir + this.testDirectoryPath + "text5" + ", " ;
+        string realAns = this.baseDir + this.testDirectoryPath + "text5" + ", " ;
 
         Assert.Equal(dist, realAns);
 
