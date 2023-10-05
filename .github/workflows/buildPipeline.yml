@@ -25,7 +25,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore
         working-directory: phase01
       - name: Testing app
-        run: dotnet test --no-restore --verbosity normal --collect:"XPlat Code Coverage"
+        run: dotnet test --no-restore
         working-directory: phase01
         
                   
