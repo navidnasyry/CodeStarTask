@@ -1,0 +1,32 @@
+name: phase6-codestar
+
+run-name:  ${{ github.actor }} is run the ${{ github.run_number }}th action
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup dotnet Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.111
+      - name: Install dependencies
+        run: dotnet restore
+        working-directory: phase01
+      - name: Building app
+        run: dotnet build --configuration Release --no-restore
+        working-directory: phase01
+      - name: Testing app
+        run: dotnet test --no-restore --verbosity normal --collect:"XPlat Code Coverage"
+        working-directory: phase01
+        
+                  
+
+
