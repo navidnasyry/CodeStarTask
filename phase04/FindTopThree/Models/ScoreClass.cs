@@ -7,17 +7,17 @@ namespace FindTopThree.Models
 {
     public class ScoreClass
     {
-        public string StudentNumber { get; set; }
+        public int StudentNumber { get; set; }
 
         public string Lesson { get; set; }
 
-        public string Score { get; set; }
+        public float Score { get; set; }
         public ScoreClass()
         {
 
         }
 
-        public ScoreClass(string studentNumber, string lesson, string score)
+        public ScoreClass(int studentNumber, string lesson, float score)
         {
             this.StudentNumber = studentNumber;
             this.Lesson = lesson;

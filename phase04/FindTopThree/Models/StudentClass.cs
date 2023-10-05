@@ -7,7 +7,7 @@ namespace FindTopThree.Models
 {
     public class StudentClass
     {
-        public string StudentNumber { get; set; }
+        public int StudentNumber { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
@@ -16,7 +16,7 @@ namespace FindTopThree.Models
         {
 
         }
-        public StudentClass(string studentNumber, string firstName, string lastName)
+        public StudentClass(int studentNumber, string firstName, string lastName)
         {
 
             this.StudentNumber = studentNumber;
