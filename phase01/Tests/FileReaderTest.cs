@@ -2,24 +2,26 @@ namespace Tests;
 using FileReader;
 public class FileReaderTest
 {
+
+    private string baseDir = Directory.GetParent(System.Environment.CurrentDirectory).Parent.Parent.Parent.ToString();
+    private string testDirectoryPath = "/Tests/testDir/";
+
     [Fact]
     public void MyFolderClass_ReturnFolderPath()
     {
-        var path = "/home/navid/test/";
 
-        MyFolder folder = new MyFolder(path);
+        MyFolder folder = new MyFolder(this.baseDir + this.testDirectoryPath);
 
-        // Assert.Signal(folder);
-        Assert.Equal(folder.GetFolderPath(), "/home/navid/test/");
+
+        Assert.Equal(folder.GetFolderPath(), this.baseDir + this.testDirectoryPath);
 
     }
 
     [Fact]
     public void MyFolderClass_ReturnFileName()
     {
-        var path = "/home/navid/test/";
 
-        MyFolder folder = new MyFolder(path);
+        MyFolder folder = new MyFolder(this.baseDir + this.testDirectoryPath);
 
         var fileName = folder.GetFileName();
 
@@ -33,9 +35,8 @@ public class FileReaderTest
     [Fact]
     public void MyFolderClass_ReturnFileContext()
     {
-        var path = "/home/navid/test/";
 
-        MyFolder folder = new MyFolder(path);
+        MyFolder folder = new MyFolder(this.baseDir + this.testDirectoryPath);
         
         var fileContext = folder.GetFileContext();
 
