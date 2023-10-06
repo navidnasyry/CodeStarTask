@@ -1,5 +1,5 @@
 namespace Tests;
-using FileReader;
+using FullTextSearcher.FileReader;
 public class FileReaderTest
 {
 

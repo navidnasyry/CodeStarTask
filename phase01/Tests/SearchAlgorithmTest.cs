@@ -1,6 +1,6 @@
+using FullTextSearcher.SearchAlgorithm;
+using FullTextSearcher.FileReader;
 namespace Tests;
-using SearchAlgorithm;
-using FileReader;
 
 public class SearchAlgorithmTest
 {

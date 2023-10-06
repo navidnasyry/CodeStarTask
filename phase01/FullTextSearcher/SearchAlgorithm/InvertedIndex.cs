@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Text;
-namespace SearchAlgorithm;
+namespace FullTextSearcher.SearchAlgorithm;
 
 public class InvertedIndex
 {
