@@ -1,6 +1,6 @@
 name: phase6-codestar
 
-run-name:  ${{ github.actor }} is run the ${{ github.run_number }}th action
+run-name:  ${{ github.actor }} is runing the ${{ github.run_number }}th action
 
 on:
   push:

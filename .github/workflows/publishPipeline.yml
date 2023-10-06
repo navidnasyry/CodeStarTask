@@ -1,0 +1,27 @@
+name: publish
+
+on:
+  release:
+    types:
+      published
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Dotnet Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.111
+      - name: Get current release version
+        id: version
+        uses: pozetroninc/github-action-get-latest-release@main
+        with:
+          repository: navidnasyry/CodeStarTask
+      - name: Build library and generage NuGet package
+        run: dotnet pack -c Release -o artifacts -p:PackageVersion=${{ steps.version.outputs.release }}
+        working-directory: phase01/FullTextSearcher
+      - name: publish NuGet package
+        run: dotnet nuget push ./**/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
