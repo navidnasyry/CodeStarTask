@@ -22,8 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FileReader\FileReader.csproj" />
-    <ProjectReference Include="..\SearchAlgorithm\SearchAlgorithm.csproj" />
+    <!-- <ProjectReference Include="..\FileReader\FileReader.csproj" />
+    <ProjectReference Include="..\SearchAlgorithm\SearchAlgorithm.csproj" /> -->
+    <ProjectReference Include="..\FullTextSearcher\FullTextSearcher.csproj" />
+
   </ItemGroup>
 
 </Project>

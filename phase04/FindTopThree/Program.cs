@@ -10,3 +10,4 @@ ProblemSolver ps = new ProblemSolver(stdFilePath, scrFilePaht);
 // ps.WriteStudentList();
 // ps.WriteScoreList();
 ps.WriteTopThreeStudent();
+

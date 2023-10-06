@@ -1,4 +1,4 @@
-﻿namespace FileReader;
+﻿namespace FullTextSearcher.FileReader;
 public class MyFolder
 {
 

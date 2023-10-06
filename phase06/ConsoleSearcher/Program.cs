@@ -1,5 +1,3 @@
-﻿// using TextSearcher;
-
 
 
 if (args.Length == 2)

@@ -1,18 +1,17 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.IO;
-using FileReader;
-using SearchAlgorithm;
+using FullTextSearcher.FileReader;
+using FullTextSearcher.SearchAlgorithm;
 // using System.Collections;
 
 
 
+InitApp();
 
-MyFolder folderObj = InitApp();
 
-RunInvertedindex(folderObj);
 
 // myInvertedIndex.WriteHashTable();
-static MyFolder InitApp()
+static void InitApp()
 {
     Console.WriteLine("Start Program...");
 
@@ -20,29 +19,32 @@ static MyFolder InitApp()
 
     string folderPath = Console.ReadLine();
 
-    MyFolder folderData = new MyFolder(folderPath);
-
-    return folderData;
-}
-
-static void RunInvertedindex(MyFolder folderData)
-{
     Console.WriteLine("Enter the desired word : ");
 
     string myTerm = Console.ReadLine();
+
+    RunInvertedIndexSearch(folderPath, myTerm);
+
+    return ;
+}
+
+
+static void RunInvertedIndexSearch(string folderPath,
+                                    string searchedTerm)
+{
+
+    MyFolder folderData = new MyFolder(folderPath);
 
     InvertedIndex myInvertedIndex = new InvertedIndex(
         folderData.GetFileName(),
         folderData.GetFileContext()
     );
 
-
     myInvertedIndex.CreateHashtable();
 
-    string dist = myInvertedIndex.FindTerm(myTerm);
+    string dist = myInvertedIndex.FindTerm(searchedTerm);
 
     Console.WriteLine("Your response : ");
 
     Console.WriteLine(dist);
 }
-
