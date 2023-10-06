@@ -5,10 +5,6 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullTextSearcher", "FullTextSearcher\FullTextSearcher.csproj", "{F2E5E71F-9EF7-408C-A168-484D570D5B7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileReader", "FileReader\FileReader.csproj", "{841C4D0D-C93C-460D-9939-A498588CADB3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAlgorithm", "SearchAlgorithm\SearchAlgorithm.csproj", "{915B04A1-E597-4C15-B7F1-95CDD6F1F7EF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{24A2B437-DF47-42CC-AD21-761C7F10A2A0}"
 EndProject
 Global
