@@ -20,6 +20,7 @@ jobs:
         uses: pozetroninc/github-action-get-latest-release@master
         with:
           repository: navidnasyry/CodeStarTask
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - name: Build library and generage NuGet package
         run: dotnet pack -c Release -o artifacts -p:PackageVersion=${{ steps.version.outputs.release }}
         working-directory: phase01/FullTextSearcher
