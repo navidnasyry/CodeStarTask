@@ -8,8 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FileReader" Version="1.0.0" />
-    <PackageReference Include="NavidNasyry.First.TextSearcher" Version="1.0.4" />
+    <PackageReference Include="NavidNasyry.First.FullTextSearcher" Version="1.0.5" />
   </ItemGroup>
 
 </Project>

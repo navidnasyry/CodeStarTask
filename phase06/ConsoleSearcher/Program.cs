@@ -1,11 +1,11 @@
-
+using NavidNasyry.First.FullTextSearcher;
 
 if (args.Length == 2)
 {
-    RunInvertedIndexSearch(
-        args[0],
-        args[1]
-    );
+    // RunInvertedIndexSearch(
+    //     args[0],
+    //     args[1]
+    // );
 }
 else
 {
