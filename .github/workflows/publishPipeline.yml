@@ -17,7 +17,7 @@ jobs:
           dotnet-version: 7.0.111
       - name: Get current release version
         id: version
-        uses: pozetroninc/github-action-get-latest-release@main
+        uses: pozetroninc/github-action-get-latest-release@master
         with:
           repository: navidnasyry/CodeStarTask
       - name: Build library and generage NuGet package
