@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
+  <!-- <ItemGroup>
     <ProjectReference Include="..\FileReader\FileReader.csproj" />
     <ProjectReference Include="..\SearchAlgorithm\SearchAlgorithm.csproj" />
-  </ItemGroup>
+  </ItemGroup> -->
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
