@@ -4,6 +4,9 @@ using ConsoleTextSearcher;
 using ConsoleTextSearcher.Models;
 
 
+// IElasticClient client = ElasticClientFactory.CreateElasticClient();
+
+
 InitApp();
 
 
@@ -17,28 +20,57 @@ static void InitApp()
 
     CheckConnection2Elasticsearch();
 
-    InitIndex(term);
+    InitIndex(dirPath);
 
-    //SearchTerm(term);
+    List<Document> res = SearchTerm(term);
+
+    foreach (var data in res)
+    {
+        Console.WriteLine(data.FileName.ToString());
+    }
 
     return;
 }
 
 
 
-static void InitIndex(string indexName)
+static void InitIndex(string dirPath)
 {
+    // Create Index
+    string indexName = dirPath.Replace('/', '_').ToLower();
     var indexDefiner = new IndexDefiner();
-
     indexDefiner.CreateIndex(indexName);
+    //OpenFolder
+    OpenFolder fPathObj = new OpenFolder(dirPath);
+    IElasticClient client = ElasticClientFactory.CreateElasticClient();
+    // Add Documents
+    foreach (var (fName, fContext) in fPathObj.GetFileName().Zip(fPathObj.GetFileContext()))
+    {
+        var doc = new Document
+        {
+            FileName = fName,
+            Text = fContext
+        };
+        var indexResponse = client.Index(
+            doc,
+            i => i.Index(indexName)
+        );
+        if (!indexResponse.IsValid)
+        {
+            Console.WriteLine("--Error--");
+        }
 
-    
+
+    }
+
+    return;
 }
 
 
 
 
-static void CheckConnection2Elasticsearch(){
+static void CheckConnection2Elasticsearch()
+{
 
     IElasticClient client = ElasticClientFactory.CreateElasticClient();
 
@@ -48,14 +80,12 @@ static void CheckConnection2Elasticsearch(){
 }
 
 
-static void SearchTerm(string inputTerm)
+static List<Document> SearchTerm(string inputTerm)
 {
 
     IElasticClient client = ElasticClientFactory.CreateElasticClient();
 
     var searchResponse = client.Search<Document>(s => s
-        .From(0)
-        .Size(10)
         .Query(q => q
             .Match(m => m
                 .Field(f => f.Text)
@@ -64,6 +94,6 @@ static void SearchTerm(string inputTerm)
         )
     );
 
-    Console.WriteLine(searchResponse.Documents.ToString());
-    return ;
+    
+    return searchResponse.Documents.ToList();
 }

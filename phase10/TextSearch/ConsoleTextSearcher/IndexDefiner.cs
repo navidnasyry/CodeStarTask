@@ -12,17 +12,27 @@ namespace ConsoleTextSearcher
             client = ElasticClientFactory.CreateElasticClient();
         }
 
-        public void CreateIndex(string index)
+        public void CreateIndex(string indexName)
         {
-            var response = client.Indices.Create(index, s => s
+            var response = this.client.Indices.Create(indexName,
+                c => c
                 .Settings(CreateSettings)
-                .Map<Document>(CreateMapping));
+                .Map<Document>(m => m
+                .AutoMap()
+                )
+            );
+            Console.WriteLine(response.ToString());
+
+            // var response = client.Indices.Create(index
+            //     s => s
+            //     .Settings(CreateSettings)
+            //     .Map<DocumeCreateSettingsnt>(CreateMapping));
         }
 
         private IPromise<IIndexSettings> CreateSettings(IndexSettingsDescriptor settingsDescriptor)
         {
             return settingsDescriptor
-                .Setting("max_ngram_diff", 7)
+                // .Setting("max_ngram_diff", 7)
                 .Analysis(CreateAnalysis);
         }
 
@@ -44,7 +54,7 @@ namespace ConsoleTextSearcher
             return analyzersDescriptor
                 .Custom(Analyzers.NgramAnalyzer, custom => custom
                     .Tokenizer("standard")
-                    .Filters("lowercase", TokenFilters.NgramFilter));
+                    .Filters("lowercase", "whitespace"));
         }
 
         private static IPromise<ITokenFilters> CreateTokenFilters(TokenFiltersDescriptor tokenFiltersDescriptor)
