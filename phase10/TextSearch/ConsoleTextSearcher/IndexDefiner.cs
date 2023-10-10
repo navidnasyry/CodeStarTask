@@ -14,56 +14,34 @@ namespace ConsoleTextSearcher
 
         public void CreateIndex(string indexName)
         {
+            var r_response = this.client.Indices.Delete(indexName);
             var response = this.client.Indices.Create(indexName,
                 c => c
-                .Settings(CreateSettings)
+                .Settings(s => s
+                    .Analysis(a => a
+                        .Analyzers(an => an.
+                            Custom("my_custom", c => c
+                                .Tokenizer("whitespace")
+                                .Filters("lowercase")
+                            )
+                        )
+                    )
+                )
                 .Map<Document>(m => m
-                .AutoMap()
+                    .Properties(p => p
+                        .Text(t => t
+                            .Name(n => n.Text)
+                            .Analyzer("my_custom")
+                        )
+                        .Text(t => t.
+                            Name(n => n.FileName)
+                        )
+                    )
                 )
             );
             Console.WriteLine(response.ToString());
-
-            // var response = client.Indices.Create(index
-            //     s => s
-            //     .Settings(CreateSettings)
-            //     .Map<DocumeCreateSettingsnt>(CreateMapping));
+            return;
         }
 
-        private IPromise<IIndexSettings> CreateSettings(IndexSettingsDescriptor settingsDescriptor)
-        {
-            return settingsDescriptor
-                // .Setting("max_ngram_diff", 7)
-                .Analysis(CreateAnalysis);
-        }
-
-        private ITypeMapping CreateMapping(TypeMappingDescriptor<Document> mappingDescriptor)
-        {
-            return mappingDescriptor
-                .Properties(pr => pr.AddAboutFieldMapping());
-        }
-
-        private IAnalysis CreateAnalysis(AnalysisDescriptor analysisDescriptor)
-        {
-            return analysisDescriptor
-                .TokenFilters(CreateTokenFilters)
-                .Analyzers(CreateAnalyzers);
-        }
-
-        private static IPromise<IAnalyzers> CreateAnalyzers(AnalyzersDescriptor analyzersDescriptor)
-        {
-            return analyzersDescriptor
-                .Custom(Analyzers.NgramAnalyzer, custom => custom
-                    .Tokenizer("standard")
-                    .Filters("lowercase", "whitespace"));
-        }
-
-        private static IPromise<ITokenFilters> CreateTokenFilters(TokenFiltersDescriptor tokenFiltersDescriptor)
-        {
-            return tokenFiltersDescriptor
-                .NGram(TokenFilters.NgramFilter, ng => ng
-                    .MinGram(3)
-                    .MaxGram(10));
-        }
- 
     }
 }

@@ -6,10 +6,10 @@ namespace ConsoleTextSearcher.Models
 {
     public class Document
     {
-        [JsonPropertyName("fileName")]
+        // [JsonPropertyName("fileName")]
         public string FileName { get; set; }
 
-        [JsonPropertyName("text")]
+        // [JsonPropertyName("text")]
         public string Text { get; set; }
 
     }
