@@ -40,6 +40,7 @@ namespace ConsoleTextSearcher
                 )
             );
             Console.WriteLine(response.ToString());
+            
             return;
         }
 

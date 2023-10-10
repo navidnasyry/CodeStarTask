@@ -24,6 +24,7 @@ static void InitApp()
 
     List<Document> res = SearchTerm(term);
 
+    Console.WriteLine("\nResponse : ");
     foreach (var data in res)
     {
         Console.WriteLine(data.FileName.ToString());
@@ -89,7 +90,7 @@ static List<Document> SearchTerm(string inputTerm)
         .Query(q => q
             .Match(m => m
                 .Field(f => f.Text)
-                .Query(inputTerm)
+                .Query(inputTerm.ToLower())
             )
         )
     );
