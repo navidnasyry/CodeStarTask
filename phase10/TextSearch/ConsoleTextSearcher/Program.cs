@@ -85,7 +85,6 @@ static List<Document> SearchTerm(string inputTerm)
 {
 
     IElasticClient client = ElasticClientFactory.CreateElasticClient();
-
     var searchResponse = client.Search<Document>(s => s
         .Query(q => q
             .Match(m => m
