@@ -10,14 +10,17 @@ namespace ConsoleTextSearcher
 {
     public class ElasticClientFactory:IElasticClientFactory
     {
-        private IElasticClient client;
+        private static IElasticClient client = null;
+
         public IElasticClient CreateElasticClient(string elasticUri, bool debugMode= false)
         {
+            
             var uri = new Uri (elasticUri);
             var connectionSettings = new ConnectionSettings (uri);
             if(debugMode)
                 connectionSettings.EnableDebugMode();
             client = new ElasticClient(connectionSettings);
+        
             return client;
         }
 

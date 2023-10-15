@@ -16,12 +16,18 @@ namespace ConsoleTextSearcher.Classes
             clientFactory = clientObj;
         }
 
+        public string PrepareIndexName(string inpStr)
+        {
+            return inpStr.Replace('/', '_').ToLower();
+        }
+
         public bool CreateCustomIndex(string indexName)
         {
 
             var client = clientFactory.GetElasticClient();
-            var preIndex = client.Indices.Delete(indexName);
-            var indexResponse = client.Indices.Create(indexName,
+            var cleanName = PrepareIndexName(indexName);
+            var preIndex = client.Indices.Delete(cleanName);
+            var indexResponse = client.Indices.Create(cleanName,
                 c => c
                 .Settings(s => s
                     .Analysis(a => a

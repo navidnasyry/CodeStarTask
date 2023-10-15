@@ -96,5 +96,4 @@ static List<Document> SearchTerm(string inputTerm)
     );
 
     
-    return searchResponse.Documents.ToList();
 }
