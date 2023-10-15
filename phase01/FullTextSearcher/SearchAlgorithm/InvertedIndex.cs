@@ -58,7 +58,7 @@ public class InvertedIndex
     }
     #endregion
     
-    #region Public Methods
+    #region Public Methodsgive me docker compose file for elastic search and kibana
     // Public Methods
     public InvertedIndex(List<string> fileNames, List<string> fileContext)
     {
