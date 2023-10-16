@@ -5,7 +5,7 @@ using ConsoleTextSearcher.Interfaces;
 try
 {
 
-    IInputOutput IOClass = new ConsoleInputOutput();
+    IInputOutput inputOutputClass = new ConsoleInputOutput();
     ElasticClientFactory elasticClientObj = new ElasticClientFactory();
     IElasticClient client = elasticClientObj.CreateElasticClient(
         "http://localhost:9200"
@@ -13,8 +13,8 @@ try
 
     if (elasticClientObj.CheckClientConnection())
     {
-        string item = IOClass.ReadString();
-        string dirPaht = IOClass.ReadString();
+        string item = inputOutputClass.ReadString();
+        string dirPaht = inputOutputClass.ReadString();
 
 
         IndexDefiner indexObj = new IndexDefiner(elasticClientObj);
@@ -25,12 +25,12 @@ try
 
         var result = searchObj.SearchItem(dirPaht, item);
 
-        IOClass.WriteDocumentList(result, 3);
+        inputOutputClass.WriteDocumentList(result, 3);
 
     }
     else
     {
-        IOClass.WriteString("Connection to Elastic failed !!");
+        inputOutputClass.WriteString("Connection to Elastic failed !!");
     }
 }
 catch (Exception ex)
