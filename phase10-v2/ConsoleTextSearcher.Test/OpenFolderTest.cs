@@ -8,8 +8,8 @@ public class OpenFolderTest
     IOpenFolder folderObj = new OpenFolder();
     public static IEnumerable<object[]> Data()
     {
-        yield return new object[] {new List<string> { "name/1/2", "name/2/3", "name/3/4" }};
-        yield return new object[] {new List<string> { "name", "name 2", "name 3", "name 4" }};
+        yield return new object[] { new List<string> { "name/1/2", "name/2/3", "name/3/4" } };
+        yield return new object[] { new List<string> { "name", "name 2", "name 3", "name 4" } };
     }
 
     [Theory]
@@ -41,7 +41,7 @@ public class OpenFolderTest
     }
 
     [Theory]
-    [InlineData("/ConsoleTextSearcher.Test/TestCases")]
+    [InlineData("/ConsoleTextSearcher.Test/TestCases/")]
     public void ReadFolderContents_ReturnTrue(string folderPath)
     {
         string baseDir = Directory.GetParent(System.Environment.CurrentDirectory).Parent.Parent.Parent.ToString();
@@ -51,7 +51,7 @@ public class OpenFolderTest
 
 
     [Theory]
-    [InlineData("./FacePath")]
+    [InlineData("./FakePath")]
     public void ReadFolderContents_ReturnFalse(string folderPath)
     {
         var res = folderObj.ReadFolderContents(folderPath);
