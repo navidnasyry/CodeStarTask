@@ -17,9 +17,9 @@ namespace ConsoleTextSearcher.Classes
                 Console.WriteLine(str);
                 return true;
             }
-            catch (Exception ex)
+            catch (System.IO.IOException ex)
             {
-                throw;
+                return false;
             }
         }
         public string ReadString()
@@ -29,9 +29,9 @@ namespace ConsoleTextSearcher.Classes
                 var inputStr = Console.ReadLine();
                 return inputStr;
             }
-            catch (Exception ex)
+            catch (System.IO.IOException ex)
             {
-                throw;
+                return false;
             }
 
         }
@@ -59,10 +59,8 @@ namespace ConsoleTextSearcher.Classes
             }
             catch (Exception ex)
             {
-                throw;
+                return false;
             }
-
-
 
         }
     }

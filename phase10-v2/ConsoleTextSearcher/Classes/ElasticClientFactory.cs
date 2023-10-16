@@ -8,26 +8,28 @@ using ConsoleTextSearcher.Interfaces;
 
 namespace ConsoleTextSearcher
 {
-    public class ElasticClientFactory:IElasticClientFactory
+    public class ElasticClientFactory : IElasticClientFactory
     {
         private static IElasticClient client = null;
 
-        public IElasticClient CreateElasticClient(string elasticUri, bool debugMode= false)
+        public IElasticClient CreateElasticClient(string elasticUri, bool debugMode = false)
         {
-            
-            var uri = new Uri (elasticUri);
-            var connectionSettings = new ConnectionSettings (uri);
-            if(debugMode)
+
+            var uri = new Uri(elasticUri);
+            var connectionSettings = new ConnectionSettings(uri);
+            if (debugMode)
                 connectionSettings.EnableDebugMode();
             client = new ElasticClient(connectionSettings);
-        
+
             return client;
         }
 
         public bool CheckClientConnection()
         {
             if (client.Ping().ToString().Contains("200"))
+            {
                 return true;
+            }
             return false;
         }
 
@@ -35,7 +37,7 @@ namespace ConsoleTextSearcher
         {
             return client;
         }
-        
+
 
     }
 }

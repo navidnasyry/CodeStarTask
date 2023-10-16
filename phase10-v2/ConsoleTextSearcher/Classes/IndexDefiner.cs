@@ -52,7 +52,9 @@ namespace ConsoleTextSearcher.Classes
                 )
             );
             if (indexResponse.IsValid)
+            {
                 return true;
+            }
             return false;
         }
 
