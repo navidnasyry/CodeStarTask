@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Nest;
 using ConsoleTextSearcher.Interfaces;
-
+using ConsoleTextSearcher.ApplicationException;
 
 namespace ConsoleTextSearcher
 {
@@ -20,7 +20,8 @@ namespace ConsoleTextSearcher
             if (debugMode)
                 connectionSettings.EnableDebugMode();
             client = new ElasticClient(connectionSettings);
-
+            if (!this.CheckClientConnection())
+                throw new ConnectionFailedException(elasticUri);
             return client;
         }
 
