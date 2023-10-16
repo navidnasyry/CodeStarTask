@@ -31,7 +31,7 @@ namespace ConsoleTextSearcher.Classes
             }
             catch (System.IO.IOException ex)
             {
-                return false;
+                throw ex;
             }
 
         }

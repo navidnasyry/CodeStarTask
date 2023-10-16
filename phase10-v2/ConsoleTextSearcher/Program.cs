@@ -2,14 +2,15 @@
 using ConsoleTextSearcher;
 using ConsoleTextSearcher.Classes;
 using ConsoleTextSearcher.Interfaces;
+using System.Configuration;
+using System.Collections.Specialized;
+
 try
 {
-
+    var elasticUri = ConfigurationManager.AppSettings.Get("ElasticsearchURL");
     IInputOutput inputOutputClass = new ConsoleInputOutput();
     ElasticClientFactory elasticClientObj = new ElasticClientFactory();
-    IElasticClient client = elasticClientObj.CreateElasticClient(
-        "http://localhost:9200"
-        );
+    IElasticClient client = elasticClientObj.CreateElasticClient(elasticUri);
 
     if (elasticClientObj.CheckClientConnection())
     {
