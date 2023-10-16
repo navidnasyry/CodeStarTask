@@ -8,7 +8,7 @@ namespace ConsoleTextSearcher.Interfaces
 {
     public interface IElasticClientFactory
     {
-        IElasticClient CreateElasticClient(string es_uri, bool debug_mod);
+        IElasticClient CreateElasticClient(string elasticUri, bool debugMode = false);
         bool CheckClientConnection();
         IElasticClient GetElasticClient();
     }
